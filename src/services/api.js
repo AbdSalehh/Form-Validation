@@ -1,11 +1,25 @@
 const BASE_URL = "https://notes-api.dicoding.dev/v2";
 
-export const getNotes = async () => {
-  const data = await fetch(`${BASE_URL}/notes`);
-  //   const data = await fetch('http://localhost:3000/users');
+export const getUsers = async () => {
+  // const data = await fetch(`${BASE_URL}/notes`);
+  const data = await fetch("http://localhost:3000/contacts");
 
   const response = await data.json();
-  return response.data;
+  return response;
+};
+
+export const addUser = async (name, email, phone) => {
+  const data = await fetch("http://localhost:3000/contacts", {
+    method: "POST",
+    body: JSON.stringify({
+      name,
+      email,
+      phone,
+    }),
+  });
+
+  const response = await data.json();
+  return response;
 };
 
 export const createNote = async (title, body) => {
@@ -21,8 +35,8 @@ export const createNote = async (title, body) => {
   return response.data;
 };
 
-export const deleteNote = async (id) => {
-  const data = await fetch(`${BASE_URL}/notes/${id}`, {
+export const deleteUser = async (id) => {
+  const data = await fetch(`${BASE_URL}/contacts/${id}`, {
     method: "DELETE",
   });
 
